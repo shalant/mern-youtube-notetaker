@@ -1,0 +1,19 @@
+{
+  "name": "mern-youtube-notetaker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shalant/mern-youtube-notetaker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shalant/mern-youtube-notetaker/issues"
+  },
+  "homepage": "https://github.com/shalant/mern-youtube-notetaker#readme"
+}
