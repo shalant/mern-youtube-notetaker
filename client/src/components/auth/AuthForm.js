@@ -42,7 +42,66 @@ const AuthForm = (props) => {
        }
    }, [props])
 
-   
+   const components = [
+       <TextField
+            placeholder="Username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} />,
+        <TextField
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={(e) => setUsername(e.target.value)} />,
+        <Button
+            variant='contained'
+            color='primary'
+            onClick={() => authenticate()}
+        >
+            {action}
+        </Button>
+   ]
+
+if(username) {
+    //redirect to home page
+
+}
+
+return (
+    <Grid container direction='row' item xs={12} justify= 'center' alignItems='center'>
+        <Grid
+            container
+            direction='column'
+            alignItems='stretch'
+            justify='center'
+            component={Card}
+            item
+            spacing={3}
+            sx={8}
+            md={4}
+            style={{padding: '20px'}}
+        >
+            <Grid container item xs={12} justify='center'>
+                <Typography variant='h3'>{action}</Typography>
+            </Grid>
+            {
+                components.map(component => {
+                    return (
+                        <Grid container item direction='column' xs={12} alignItems='stretch'>
+                            {component}
+                        </Grid>
+                    );
+                })
+            }
+            {
+                action ==='Sign In' ? 
+                    <Link to='/signup'>Don't have an account? Sign Up</Link> :
+                    <Link to='/login'>Already have an account? Sign In</Link>
+            
+            }
+        </Grid>
+    </Grid>
+)
 
 }
 
