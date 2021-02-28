@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const Note = require('../models/note');
-const User = require('../models/user');
 
 const saveNote = (note, res) => {
     note
@@ -27,9 +26,8 @@ router.post('/', (req, res) => {
         videoLink,
         videoTimestamp
     });
-
     saveNote(note, res);
-})
+});
 
 router.put('/:id', (req, res) => {
     const { title, body, videoLink, videoTimestamp } = req.body;
@@ -49,3 +47,5 @@ router.delete('./:id', (req, res) => {
         .then(() => res.json({msg: 'message deleted'}))
         .catch(() => res.json({msg: 'could not find note to delete'}));
 });
+
+module.exports = router;

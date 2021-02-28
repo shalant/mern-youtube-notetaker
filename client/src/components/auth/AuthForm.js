@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Card, Typography, Button, TextField } from '@material-ui/core';
+import { Link, withRouter } from 'react-router-dom';
+import { useAuth } from './auth';
 
 const AuthForm = (props) => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [action, setAction] = useState('sign in');
+   const { setUserName, setAuthToken, user_name } = useAuth();
 
    const authenticate = async () => {
        const basePath = 'api/auth/'; //server-side path
@@ -14,6 +17,7 @@ const AuthForm = (props) => {
            url += 'login';
        }
        console.log(url);
+       console.log(action);
 
        const response = await fetch(url, {
            method: 'POST',
@@ -22,8 +26,10 @@ const AuthForm = (props) => {
        });
 
        const json = await response.json();
+       console.log(json)
        if(response.ok) {
            setAuthToken(json.token);
+           setUserName(json.user.username); //auth context provider
            setUsername(json.user.username);
        } else {
            alert(json.msg);
@@ -51,8 +57,9 @@ const AuthForm = (props) => {
         <TextField
             placeholder="Password"
             name="password"
+            type='password'
             value={password}
-            onChange={(e) => setUsername(e.target.value)} />,
+            onChange={(e) => setPassword(e.target.value)} />,
         <Button
             variant='contained'
             color='primary'
@@ -62,7 +69,7 @@ const AuthForm = (props) => {
         </Button>
    ]
 
-if(username) {
+if(user_name) {
     //redirect to home page
 
 }
@@ -105,4 +112,4 @@ return (
 
 }
 
-export default AuthForm;
+export default withRouter (AuthForm);
