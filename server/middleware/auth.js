@@ -22,7 +22,7 @@ const auth = (req, res, next) => {
 
     const token = req.header('x-auth-token');
     if(!token) {
-        res.status(401).json({msg: 'invalid token, access denied'});
+        res.status(401).json({msg: 'Invalid token, Access denied'});
         return;
     }
 
@@ -31,7 +31,7 @@ const auth = (req, res, next) => {
         req.username = decoded;
         next();
     } catch (exception) {
-        res.status(400).json({msg: 'token is not valid'});
+        res.status(400).json({msg: 'Token is not valid'});
     }
 }
 

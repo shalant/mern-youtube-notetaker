@@ -7,16 +7,18 @@ const saveNote = (note, res) => {
     note
         .save()
         .then(note => res.json(note))
-        .catch(() => {res.status(400).json({msg: 'error: could not save the note'})});
+        .catch(() => res.status(400).json({msg: 'Error: Could not save the note'}));
 }
 
+//get request for notes from a particular user
 router.get('/', (req, res) => {
     Note.find({author: req.username.username})
         .then(notes => {
             res.json(notes);
-        }).catch(err => res.json({msg: 'could not find notes for that user'}))
+        }).catch(err => res.json({msg: 'Could not find notes for that user'}));
 });
 
+//create a route for a user
 router.post('/', (req, res) => {
     const { title, body, videoLink, videoTimestamp } = req.body;
     let note = new Note({
@@ -29,6 +31,7 @@ router.post('/', (req, res) => {
     saveNote(note, res);
 });
 
+//update a note
 router.put('/:id', (req, res) => {
     const { title, body, videoLink, videoTimestamp } = req.body;
     Note.findById(req.params.id)
@@ -38,14 +41,15 @@ router.put('/:id', (req, res) => {
             note.videoLink = videoLink;
             note.videoTimestamp = videoTimestamp;
             saveNote(note, res);
-        }).catch(() => res.json({msg: 'no note found with that id'}));
-})
+        }).catch(() => res.json({msg: 'Do note found with that ID'}));
+});
 
+//delete a note
 router.delete('./:id', (req, res) => {
     Note
         .findByIdAndDelete(req.params.id)
-        .then(() => res.json({msg: 'message deleted'}))
-        .catch(() => res.json({msg: 'could not find note to delete'}));
+        .then(() => res.json({msg: 'Message deleted'}))
+        .catch(() => res.json({msg: 'Could not find note to delete'}));
 });
 
 module.exports = router;

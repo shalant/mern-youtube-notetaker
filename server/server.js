@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const note = require('./models/note');
-const app = express();
 const auth = require('./middleware/auth');
+const app = express();
 
 const API_PORT = process.env.PORT || 8080
 
@@ -16,7 +16,7 @@ mongoose.connect(dbPath, {
     useCreateIndex: true,
     useUnifiedTopology: true
 }).then(() => {
-    console.log('connected to db');
+    console.log('Connected to the DB');
 }).catch((err) => console.log('error connecting to db'));
 
 app.all('/api/*', auth);
