@@ -6,16 +6,17 @@ import { useAuth } from './auth';
 const AuthForm = (props) => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
-   const [action, setAction] = useState('sign in');
+   const [action, setAction] = useState('Sign In');
    const { setUserName, setAuthToken, user_name } = useAuth();
 
    const authenticate = async () => {
        const basePath = 'api/auth/'; //server-side path
        let url = basePath;
 
-       if(action ==='sign in') {
+       if(action ==='Sign In') {
            url += 'login';
        }
+
        console.log(url);
        console.log(action);
 
@@ -41,9 +42,9 @@ const AuthForm = (props) => {
            setAction(props.action);
        } else {
            if(props.location.pathname === '/signup') {
-               setAction('sign up');
+               setAction('Sign Up');
            } else {
-               setAction('sign in');
+               setAction('Sign In');
            }
        }
    }, [props])
